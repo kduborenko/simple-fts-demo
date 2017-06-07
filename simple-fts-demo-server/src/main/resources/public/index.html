@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Simple Full-text Search Demo</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.min.css"/>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-red.min.css"/>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="./index.js"></script>
     <link rel="stylesheet" href="./index.css"/>
@@ -19,14 +19,14 @@
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
             <a class="mdl-layout__tab is-active" href="/">Demo</a>
-            <a class="mdl-layout__tab" href="/data-structure">Data Structure</a>
+            <a class="mdl-layout__tab" href="./data-structure.html">Data Structure</a>
         </div>
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Simple FTS Demo</span>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="/">Demo</a>
-            <a class="mdl-navigation__link" href="/data-structure">Data Structure</a>
+            <a class="mdl-navigation__link" href="./data-structure.html">Data Structure</a>
         </nav>
     </div>
     <main class="mdl-layout__content">
@@ -36,11 +36,6 @@
                     <input class="mdl-textfield__input" type="text" id="search-term">
                     <label class="mdl-textfield__label" for="search-term">Search...</label>
                 </div>
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                        id="search-btn">
-                    <i class="material-icons">search</i>
-                    Search
-                </button>
                 <div id="search-results" class="mdl-grid"></div>
             </div>
         </section>

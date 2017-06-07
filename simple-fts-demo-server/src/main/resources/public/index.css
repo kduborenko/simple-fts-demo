@@ -18,3 +18,23 @@ main section {
     top: 30px;
     z-index: 1000;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.mdl-card {
+    min-height: unset;
+}
+
+#index thead tr th:first-child,
+#index tbody tr td:first-child {
+    width:1%;
+    white-space:nowrap;
+}

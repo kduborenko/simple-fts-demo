@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Simple Full-text Search Demo</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-indigo.min.css"/>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="./data-structure.js"></script>
+    <link rel="stylesheet" href="./index.css"/>
+</head>
+<body>
+
+<div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">Simple Full-text Search Demo</span>
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a class="mdl-layout__tab" href="/">Demo</a>
+            <a class="mdl-layout__tab is-active" href="./data-structure.html">Data Structure</a>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Simple FTS Demo</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="/">Demo</a>
+            <a class="mdl-navigation__link" href="./data-structure.html">Data Structure</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="search-tab">
+            <div class="page-content">
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#keywords" class="mdl-tabs__tab is-active">Keywords</a>
+                        <a href="#index" class="mdl-tabs__tab">Index</a>
+                    </div>
+
+                    <div class="mdl-tabs__panel is-active" id="keywords">
+
+                    </div>
+
+                    <div class="mdl-tabs__panel" id="index">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>

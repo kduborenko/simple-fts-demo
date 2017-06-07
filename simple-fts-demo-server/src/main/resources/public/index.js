@@ -16,6 +16,7 @@
 
     function highlightMatches(sr, field) {
         let text = sr.document[field];
+        if (!(field in sr.matches)) return text;
         let matches = sr.matches[field].sort();
         let result = text.substr(0, matches[0].position.start);
         for (let i = 0; i < matches.length; i++) {
@@ -46,7 +47,7 @@
 
         searchResults.forEach(sr => {
             let card = document.createElement('div');
-            let cardSize = Math.min(3, Math.round(sr.document.text.length / minTextLength)) * 4;
+            let cardSize = Math.min(4, Math.round(sr.document.text.length / minTextLength)) * 3;
             card.className = `mdl-card mdl-shadow--2dp mdl-cell mdl-cell mdl-cell--${cardSize}-col`;
             card.innerHTML = `
 <div class="mdl-card__supporting-text">${highlightMatches(sr, 'text')}</div>
@@ -89,13 +90,16 @@
 
     // Add listeners to components
     window.addEventListener('load', () => {
-        document.querySelector('#search-btn')
-            .addEventListener('click', () => search());
+        document.querySelector('#search-term')
+            .addEventListener('input', () => search());
         document.querySelector('#add-note-btn')
             .addEventListener('click', () => document.querySelector('#add-note').show());
         document.querySelector('#close-add-note-dialog-btn')
             .addEventListener('click', () => document.querySelector('#add-note').close());
         document.querySelector('#add-new-note-btn')
             .addEventListener('click', () => addNote());
-    })
+
+        search();
+    });
+
 })();
