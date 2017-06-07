@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.util.HtmlUtils
 import org.springframework.web.util.UriComponentsBuilder
 import java.util.UUID
 import kotlin.reflect.full.memberProperties
@@ -25,7 +26,9 @@ class FullTextSearchApiController {
     private var documents = mutableMapOf<UUID, Document>()
 
     @RequestMapping(method = arrayOf(RequestMethod.POST))
-    fun add(@RequestBody document: Document, uriBuilder: UriComponentsBuilder): ResponseEntity<Void> {
+    fun add(@RequestBody unsafedocument: Document, uriBuilder: UriComponentsBuilder): ResponseEntity<Void> {
+        val document = unsafedocument.copy(
+                text = HtmlUtils.htmlEscape(unsafedocument.text))
         ftsIndex.add(document)
         documents[document.id] = document
 

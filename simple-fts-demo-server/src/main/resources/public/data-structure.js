@@ -1,5 +1,5 @@
 (function () {
-    function renderKeywordsRows(keywords) {
+    function renderKeywordsRows(keywords, index) {
         let html = '';
 
         for (let id in keywords) if (keywords.hasOwnProperty(id)) {
@@ -7,7 +7,7 @@
                 let kw = keywords[id].text[i];
                 html += '<tr>';
                 if (i === 0) {
-                    html += `<td rowspan="${keywords[id].text.length}">${id}</td>`;
+                    html += `<td rowspan="${keywords[id].text.length}">${index[kw.word][id].text}</td>`;
                 }
                 html += `<td class="mdl-data-table__cell--non-numeric">${kw.word}</td>`;
                 html += `<td class="mdl-data-table__cell--non-numeric">${kw.position.start} .. ${kw.position.end}</td>`;
@@ -18,20 +18,20 @@
         return html;
     }
 
-    function renderKeywordsTable(keywords) {
+    function renderKeywordsTable(keywords, index) {
         let keywordsSection = document.createElement('div');
 
         keywordsSection.innerHTML = `
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>Text</th>
                   <th class="mdl-data-table__cell--non-numeric">Word</th>
                   <th class="mdl-data-table__cell--non-numeric">Position</th>
                 </tr>
               </thead>
               <tbody>
-                ${renderKeywordsRows(keywords)}
+                ${renderKeywordsRows(keywords, index)}
               </tbody>
             </table>
         `;
@@ -39,8 +39,28 @@
         return keywordsSection;
     }
 
+    function highlightMatches(text, kws) {
+        kws = kws.sort();
+        let result = text.substr(0, kws[0].position.start);
+        for (let i = 0; i < kws.length; i++) {
+            let kw = kws[i];
 
-    function renderIndexRows(index) {
+            result += '<b>';
+            result += text.substr(kw.position.start,
+                kw.position.end - kw.position.start + 1);
+            result += '</b>';
+
+            if (i + 1 === kws.length) {
+                result += text.substr(kw.position.end + 1);
+            } else {
+                result += text.substr(kw.position.end + 1,
+                    kws[i + 1].position.start - kw.position.end - 1);
+            }
+        }
+        return result;
+    }
+
+    function renderIndexRows(index, keywords) {
         let html = '';
 
         for (let word in index) if (index.hasOwnProperty(word)) {
@@ -51,7 +71,9 @@
                     html += `<td rowspan="${Object.keys(index[word]).length}">${word}</td>`;
                     firstId = false;
                 }
-                html += `<td class="mdl-data-table__cell--non-numeric">${index[word][id].text}</td>`;
+                let kws = keywords[id].text.filter(i => i.word === word);
+                let text = highlightMatches(index[word][id].text, kws);
+                html += `<td class="mdl-data-table__cell--non-numeric">${text}</td>`;
                 html += '</tr>';
             }
         }
@@ -59,7 +81,7 @@
         return html;
     }
 
-    function renderIndexTable(index) {
+    function renderIndexTable(index, keywords) {
         let indexSection = document.createElement('div');
 
         indexSection.innerHTML = `
@@ -71,7 +93,7 @@
                 </tr>
               </thead>
               <tbody>
-                ${renderIndexRows(index)}
+                ${renderIndexRows(index, keywords)}
               </tbody>
             </table>
         `;
@@ -87,9 +109,9 @@
                 if (contentType && contentType.indexOf("application/json") !== -1) {
                     return response.json().then(function (json) {
                         document.querySelector('#keywords')
-                            .appendChild(renderKeywordsTable(json.keywords));
+                            .appendChild(renderKeywordsTable(json.keywords, json.index));
                         document.querySelector('#index')
-                            .appendChild(renderIndexTable(json.index));
+                            .appendChild(renderIndexTable(json.index, json.keywords));
                     });
                 } else {
                     // todo handle error

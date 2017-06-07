@@ -33,8 +33,15 @@ table td {
     min-height: unset;
 }
 
-#index thead tr th:first-child,
-#index tbody tr td:first-child {
-    width:1%;
-    white-space:nowrap;
+.mdl-data-table tbody tr:hover {
+    background-color: unset;
+}
+
+.mdl-tabs > .mdl-tabs__panel {
+    padding: 10px;
+}
+
+.mdl-data-table td:first-of-type,
+.mdl-data-table th:first-of-type {
+    padding-left: 18px;
 }
