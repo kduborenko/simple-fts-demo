@@ -1,0 +1,1 @@
+web: java -jar simple-fts-demo-server/target/simple-fts-demo-server-1.0-SNAPSHOT.jar --server.port=$PORT
