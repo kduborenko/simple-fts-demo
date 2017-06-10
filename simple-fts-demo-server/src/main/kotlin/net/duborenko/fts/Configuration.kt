@@ -15,6 +15,9 @@ import java.util.UUID
 @ComponentScan
 open class Configuration {
 
-    @Bean open fun ftsIndex() = FullTextSearch.createIndexWithAnnotationExtractor<UUID, Document>()
+    @Bean open fun ftsIndex() =
+            FullTextSearch.createIndexWithAnnotationExtractor<UUID, Document>(
+                    rank = { it.matches.values.sumBy { it.size } }
+            )
 
 }
