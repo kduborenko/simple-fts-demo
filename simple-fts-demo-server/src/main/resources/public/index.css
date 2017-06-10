@@ -46,3 +46,17 @@ table td {
 .mdl-data-table th:first-of-type {
     padding-left: 18px;
 }
+
+@media screen and (max-width: 1024px) {
+    .mdl-layout__header {
+        display: flex;
+    }
+
+    .mdl-layout__header > * {
+        display: none;
+    }
+
+    .mdl-layout__header > .mdl-layout__header-row {
+        display: flex;
+    }
+}
