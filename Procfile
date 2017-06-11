@@ -1,1 +1,1 @@
-web: java -jar simple-fts-demo-server/target/simple-fts-demo-server-1.0-SNAPSHOT.jar --server.port=$PORT --spring.profiles.active=aws --cloud.aws.region.static=us-west-2
+web: java -jar simple-fts-demo-server/target/simple-fts-demo-server-1.0-SNAPSHOT.jar --server.port=$PORT --spring.profiles.active=redis --spring.redis.url=$REDIS_URL

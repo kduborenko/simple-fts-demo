@@ -67,7 +67,7 @@ class FullTextSearchApiController {
             else ftsIndex.search(search)
 
     @RequestMapping(method = arrayOf(RequestMethod.DELETE), value = "/{id}")
-    fun search(@PathVariable("id") id: UUID) {
+    fun delete(@PathVariable("id") id: UUID) {
         ftsIndex.remove(id)
         documents.remove(id)
         persistenceService?.save(documents.values)
